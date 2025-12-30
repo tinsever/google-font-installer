@@ -1,16 +1,12 @@
-Google Font Installer
+Google Font CLI
 =============
 
 
-Google Font Installer is a NodeJS module/CLI that lets you Search, Download and Install fonts offered by Google Web Fonts.
+Google Font CLI is a NodeJS module/CLI that lets you Search, Download and Install fonts offered by Google Web Fonts.
 
 You can use it in two ways:
 - install the module system wide and use the Command Line Interface (CLI)
 - require the module in your project and use the APIs
-
-
-![how gfi works](https://raw.githubusercontent.com/lordgiotto/google-font-installer/master/gfi.gif)
-
 
 ### Table of content
 
@@ -38,18 +34,18 @@ In Windows, due to the fact that font installation require some register modific
 
 # CLI
 
-First of all you have to install google-font-installer in your system
+First of all you have to install google-font-cli in your system
 
 ```
-$ npm install -g google-font-installer
+$ npm install -g google-font-cli
 ```
 
-Now, from your terminal emulator, you can use the command `gfi`
+Now, from your terminal emulator, you can use the command `gfcli`
 
 ### Search a font
 
 ```
-$ gfi search [family_name]
+$ gfcli search [family_name]
 ```
 The search is really permissive, so you can specify only few characters and view all the font families that contains these characters. Words order is also not important.
 For instance, search for _Source Sans_ or _Sans Source_ will produce the same result.
@@ -57,28 +53,28 @@ For instance, search for _Source Sans_ or _Sans Source_ will produce the same re
 ### Download a font
 
 ```
-$ gfi download [family_name] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants]
+$ gfcli download [family_name] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants]
 ```
 
 If **family_name** will match more than one family, nothing will be downloaded: a list of alternatives will help you better specify the font family name.
 
 Download command accepts two options:
 - `-d` or `--dest` let you specify the folder where to download the fonts. If this option is omitted the fonts will be download in the folder in which the command was called (or in the home directory if this folder is not writable by the user)
-- `-v` or `--variants` let you specify which variants of the font will be downloaded. You have to write each variant separated by the other with a comma. For example `$ gfi download Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
+- `-v` or `--variants` let you specify which variants of the font will be downloaded. You have to write each variant separated by the other with a comma. For example `$ gfcli download Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
 
 ### Install a font
 ```
-$ gfi install [family_name] [-v|--variants comma_separeted_variants]
+$ gfcli install [family_name] [-v|--variants comma_separeted_variants]
 ```
 
 If **family_name** will match more than one family, nothing will be installed: a list of alternatives will help you better specify the font family name.
 
 Install command accepts only one option:
-- `-v` or `--variants` let you specify which variants of the font will be installed. You have to write each variant separated by the other with a comma. For example `$ gfi install Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
+- `-v` or `--variants` let you specify which variants of the font will be installed. You have to write each variant separated by the other with a comma. For example `$ gfcli install Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
 
 ### Copy font CSS url
 ```
-$ gfi copy [family_name] [-v|--variants comma_separeted_variants]
+$ gfcli copy [family_name] [-v|--variants comma_separeted_variants]
 ```
 
 If **family_name** will match more than one family, nothing will be copied: a list of alternatives will help you better specify the font family name.
@@ -88,7 +84,7 @@ If **family_name** will match more than one family, nothing will be copied: a li
 
 **Search the _source_ keyword**
 ```
-$ gfi search source
+$ gfcli search source
 
 Search results for: "source"
 
@@ -108,7 +104,7 @@ Search results for: "source"
 
 **Download Source Sans Pro 600 and 700italic**
 ```
-$ gfi download source sans pro -v 600,700italic
+$ gfcli download source sans pro -v 600,700italic
 
 Source Sans Pro variant 600 downloaded in /home/user/someFolder/SourceSansPro-600.ttf
 Source Sans Pro variant 700italic downloaded in /home/user/someFolder/SourceSansPro-700italic.ttf
@@ -116,7 +112,7 @@ Source Sans Pro variant 700italic downloaded in /home/user/someFolder/SourceSans
 
 **Install Lato 100**
 ```
-$ gfi install lato -v 100
+$ gfcli install lato -v 100
 
 Lato variant 100 downloaded in /home/user/.fonts/Lato-100.ttf
 
@@ -124,7 +120,7 @@ Lato variant 100 downloaded in /home/user/.fonts/Lato-100.ttf
 
 **Copy font url for Work Sans variants 200, normal and 600**
 ```
-$ gfi copy work sans -v 200,400,600
+$ gfcli copy work sans -v 200,400,600
 
 "work sans" font url has been copied to your clipboard.
 
@@ -135,11 +131,11 @@ $ gfi copy work sans -v 200,400,600
 
 First of all you have to install the module in you NodeJS project:
 ```
-$ npm install google-font-installer --save
+$ npm install google-font-cli --save
 ```
 And then you can require it in your code:
 ```js
-var GoogleFontList = require('google-font-installer');
+var GoogleFontList = require('google-font-cli');
 ```
 
 To use this API is necessary to obtain a Browser Key enabled to Google Font API from the [Google Developer Dashboard](https://console.developers.google.com/).
@@ -323,7 +319,7 @@ Install specified variants of the font. The destination folder depends on the pl
 <a id="api-examples"></a>
 ### Examples
 ```js
-var GoogleFontlist = require('google-font-installer');
+var GoogleFontlist = require('google-font-cli');
 
 var fontList = new GoogleFontlist('VALID_API_KEY');
 
