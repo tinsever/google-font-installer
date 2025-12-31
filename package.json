@@ -25,6 +25,11 @@
     "install",
     "cli"
   ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
   "dependencies": {
     "commander": "^12.1.0",
     "copy-paste-win32fix": "^1.4.0",
@@ -39,5 +44,8 @@
   },
   "optionalDependencies": {
     "node-powershell": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }
