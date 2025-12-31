@@ -1,6 +1,8 @@
 Google Font CLI
 =============
 
+[![NPM](https://nodei.co/npm/google-font-cli.png)](https://npmjs.org/package/google-font-cli)
+
 > This tool uses [google-webfonts-helper](https://gwfh.mranftl.com/) to access Google Fonts without requiring an API key.
 
 Google Font CLI is a NodeJS module/CLI that lets you Search, Download and Install fonts offered by Google Web Fonts.
