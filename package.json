@@ -1,6 +1,6 @@
 {
   "name": "google-font-cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Fork of google-font-installer with bug fixes and maintenance updates",
   "author": "Tin Sever <mail@tin-sever.de>",
   "contributors": [
