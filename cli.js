@@ -95,26 +95,42 @@ program
       await ensureFontsLoaded(refresh);
       /** @type {FontResult[]} */
       let allResults = [];
+      let successCount = 0;
+      let failCount = 0;
 
       for (const term of families) {
         try {
           const filteredList = await getFontByNameAsync(term);
           if (filteredList.data.length !== 1) {
             handleMatchError("Download", term, null);
+            failCount++;
             continue;
           }
           const font = filteredList.getFirst();
           if (font) {
             const result = await font.saveAtAsync(variants, options.dest, format);
             allResults = allResults.concat(result);
+            successCount++;
           }
         } catch (err) {
           handleMatchError("Download", term, /** @type {Error} */ (err));
+          failCount++;
         }
       }
 
       if (allResults.length > 0) {
         printResult(null, allResults);
+      }
+
+      // If all operations failed, exit with error
+      if (failCount > 0 && successCount === 0) {
+        console.error(pc.red(pc.bold(`\nAll ${failCount} font download(s) failed.`)));
+        process.exit(1);
+      }
+
+      // Report partial failures
+      if (failCount > 0 && successCount > 0) {
+        console.log(pc.yellow(`\n${successCount} font(s) downloaded successfully, ${failCount} failed.`));
       }
     } catch (err) {
       console.error(pc.red(/** @type {Error} */ (err).toString()));
@@ -135,26 +151,42 @@ program
       await ensureFontsLoaded(refresh);
       /** @type {FontResult[]} */
       let allResults = [];
+      let successCount = 0;
+      let failCount = 0;
 
       for (const term of families) {
         try {
           const filteredList = await getFontByNameAsync(term);
           if (filteredList.data.length !== 1) {
             handleMatchError("Installation", term, null);
+            failCount++;
             continue;
           }
           const font = filteredList.getFirst();
           if (font) {
             const result = await font.installAsync(variants);
             allResults = allResults.concat(result);
+            successCount++;
           }
         } catch (err) {
           handleMatchError("Installation", term, /** @type {Error} */ (err));
+          failCount++;
         }
       }
 
       if (allResults.length > 0) {
         printResult(null, allResults);
+      }
+
+      // If all operations failed, exit with error
+      if (failCount > 0 && successCount === 0) {
+        console.error(pc.red(pc.bold(`\nAll ${failCount} font installation(s) failed.`)));
+        process.exit(1);
+      }
+
+      // Report partial failures
+      if (failCount > 0 && successCount > 0) {
+        console.log(pc.yellow(`\n${successCount} font(s) installed successfully, ${failCount} failed.`));
       }
     } catch (err) {
       console.error(pc.red(/** @type {Error} */ (err).toString()));
