@@ -34,6 +34,7 @@ $ gfcli install "Open Sans" -v regular,700
 	- [homebrew](#homebrew-using-tap)
 - [CLI](#cli)
 	- [Search a font](#search-a-font)
+	- [Caching](#caching)
 	- [Download a font](#download-a-font)
 	- [Install a font](#install-a-font)
 	- [Copy font CSS URL](#copy-font-css-url)
@@ -74,6 +75,12 @@ $ brew install gfcli
 
 From your terminal emulator, you can use the command `gfcli`
 
+### Caching
+
+- The Google Fonts metadata list is cached for 24h at `~/.gfcli/cache.json`.
+- Use `--refresh-cache` on any command to force a fresh download.
+- If the cache is valid, commands skip the download step for faster startup.
+
 ### Search a font
 
 ```
@@ -85,7 +92,7 @@ For instance, search for _Source Sans_ or _Sans Source_ will produce the same re
 ### Download a font
 
 ```
-$ gfcli download [family_name] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants] [--ttf|--woff2]
+$ gfcli download [family_name|"family1,family2"] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants] [--ttf|--woff2] [--refresh-cache]
 ```
 
 If **family_name** will match more than one family, nothing will be downloaded: a list of alternatives will help you better specify the font family name.
@@ -95,16 +102,20 @@ Download command accepts these options:
 - `-v` or `--variants` let you specify which variants of the font will be downloaded. You have to write each variant separated by the other with a comma. For example `$ gfcli download Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
 - `--ttf` downloads the font in TTF format (default)
 - `--woff2` downloads the font in WOFF2 format (optimized for web use)
+- Multiple families: pass a comma-separated list in quotes, e.g. `$ gfcli download "Inter,Roboto" --woff2 -d ./fonts`
+- `--refresh-cache` forces a fresh font list download and ignores the local cache
 
 ### Install a font
 ```
-$ gfcli install [family_name] [-v|--variants comma_separeted_variants]
+$ gfcli install [family_name|"family1,family2"] [-v|--variants comma_separeted_variants] [--refresh-cache]
 ```
 
 If **family_name** will match more than one family, nothing will be installed: a list of alternatives will help you better specify the font family name.
 
 Install command accepts only one option:
 - `-v` or `--variants` let you specify which variants of the font will be installed. You have to write each variant separated by the other with a comma. For example `$ gfcli install Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
+- Multiple families: pass a comma-separated list in quotes, e.g. `$ gfcli install "Inter,Roboto" -v 400,700`
+- `--refresh-cache` forces a fresh font list download and ignores the local cache
 
 ### Copy font CSS url
 ```
@@ -152,6 +163,21 @@ Inter variant regular downloaded in /home/user/someFolder/Inter-regular.woff2
 Inter variant 100 downloaded in /home/user/someFolder/Inter-100.woff2
 Inter variant 200 downloaded in /home/user/someFolder/Inter-200.woff2
 ...
+```
+
+**Download Inter and Roboto in one command (WOFF2)**
+```
+$ gfcli download "Inter,Roboto" --woff2 -d ./fonts
+```
+
+**Install Inter and Roboto with selected variants**
+```
+$ gfcli install "Inter,Roboto" -v regular,700
+```
+
+**Force refresh of the cached font list**
+```
+$ gfcli search inter --refresh-cache
 ```
 
 **Install Lato 100**

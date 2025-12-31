@@ -33,6 +33,7 @@ const getFontByNameAsync = (term) =>
 const ensureFontsLoaded = async (refreshCache = false) => {
   if (refreshCache) {
     fontList.loaded = false;
+    console.log(pc.bold(pc.blue("\nRefreshing Google Font List cache...\n")));
   }
   if (fontList.loaded) return;
   try {
