@@ -92,8 +92,8 @@ program
       }
       const font = filteredList.getFirst();
       const url = variants
-        ? `${font.cssUrl}:${variants.join(",")}`
-        : font.cssUrl;
+        ? `${font.getCssUrl()}:${variants.join(",")}`
+        : font.getCssUrl();
 
       ncp.copy(url, () => {
         console.log(pc.green(`"${term}" CSS URL copied to clipboard.`));
