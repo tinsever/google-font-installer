@@ -1,6 +1,13 @@
 #!/usr/bin/env node
+// @ts-check
 
 "use strict";
+
+/**
+ * @typedef {import('./lib/types').GoogleFontListInstance} GoogleFontListInstance
+ * @typedef {import('./lib/types').GoogleFontInstance} GoogleFontInstance
+ * @typedef {import('./lib/types').FontResult} FontResult
+ */
 
 const { Command } = require("commander");
 const pc = require("picocolors");
@@ -8,11 +15,17 @@ const ncp = require("copy-paste-win32fix");
 const GoogleFontList = require("./lib/google-font-list");
 const pjson = require("./package.json");
 
+/** @type {any} */
 const fontList = new GoogleFontList();
 const program = new Command();
 
 program.option("--refresh-cache", "Refresh the cached Google font list");
 
+/**
+ * Split comma-separated font family arguments into an array
+ * @param {string[]} familyArgs - Array of family arguments
+ * @returns {string[]} Array of trimmed family names
+ */
 const splitFamilies = (familyArgs) =>
   familyArgs
     .join(" ")
@@ -20,9 +33,14 @@ const splitFamilies = (familyArgs) =>
     .map((s) => s.trim())
     .filter(Boolean);
 
+/**
+ * Promisified wrapper for getFontByName
+ * @param {string} term - Font family name to search
+ * @returns {Promise<any>} Filtered font list
+ */
 const getFontByNameAsync = (term) =>
   new Promise((resolve, reject) => {
-    fontList.getFontByName(term, (err, filtered) => {
+    fontList.getFontByName(term, (/** @type {Error | null} */ err, /** @type {any} */ filtered) => {
       if (err) return reject(err);
       resolve(filtered);
     });
@@ -30,6 +48,8 @@ const getFontByNameAsync = (term) =>
 
 /**
  * Helper to wrap fontList initialization in a Promise
+ * @param {boolean} [refreshCache=false] - Whether to force refresh the cache
+ * @returns {Promise<void>}
  */
 const ensureFontsLoaded = async (refreshCache = false) => {
   if (refreshCache) {
@@ -73,6 +93,7 @@ program
 
     try {
       await ensureFontsLoaded(refresh);
+      /** @type {FontResult[]} */
       let allResults = [];
 
       for (const term of families) {
@@ -83,10 +104,12 @@ program
             continue;
           }
           const font = filteredList.getFirst();
-          const result = await font.saveAtAsync(variants, options.dest, format);
-          allResults = allResults.concat(result);
+          if (font) {
+            const result = await font.saveAtAsync(variants, options.dest, format);
+            allResults = allResults.concat(result);
+          }
         } catch (err) {
-          handleMatchError("Download", term, err);
+          handleMatchError("Download", term, /** @type {Error} */ (err));
         }
       }
 
@@ -94,7 +117,7 @@ program
         printResult(null, allResults);
       }
     } catch (err) {
-      console.error(pc.red(err.toString()));
+      console.error(pc.red(/** @type {Error} */ (err).toString()));
       process.exit(1);
     }
   });
@@ -110,6 +133,7 @@ program
 
     try {
       await ensureFontsLoaded(refresh);
+      /** @type {FontResult[]} */
       let allResults = [];
 
       for (const term of families) {
@@ -120,10 +144,12 @@ program
             continue;
           }
           const font = filteredList.getFirst();
-          const result = await font.installAsync(variants);
-          allResults = allResults.concat(result);
+          if (font) {
+            const result = await font.installAsync(variants);
+            allResults = allResults.concat(result);
+          }
         } catch (err) {
-          handleMatchError("Installation", term, err);
+          handleMatchError("Installation", term, /** @type {Error} */ (err));
         }
       }
 
@@ -131,7 +157,7 @@ program
         printResult(null, allResults);
       }
     } catch (err) {
-      console.error(pc.red(err.toString()));
+      console.error(pc.red(/** @type {Error} */ (err).toString()));
       process.exit(1);
     }
   });
@@ -146,12 +172,13 @@ program
     const term = family.join(" ");
     const variants = options.variants ? options.variants.split(",") : false;
 
-    fontList.getFontByName(term, (err, filteredList) => {
+    fontList.getFontByName(term, (/** @type {Error | null} */ err, /** @type {any} */ filteredList) => {
       if (err || filteredList.data.length !== 1) {
         handleMatchError("Copy", term, err);
         return;
       }
       const font = filteredList.getFirst();
+      if (!font) return;
       const url = variants
         ? `${font.getCssUrl()}:${variants.join(",")}`
         : font.getCssUrl();
@@ -173,6 +200,13 @@ if (program.args.length === 0) {
  * Output Helpers
  */
 
+/**
+ * Handle and display match errors for font operations
+ * @param {string} action - Action being performed (e.g., "Download", "Install")
+ * @param {string} term - Font family name that failed
+ * @param {Error | null} err - Error object or null
+ * @returns {void}
+ */
 function handleMatchError(action, term, err) {
   if (err) {
     console.error(pc.red(err.toString()));
@@ -184,6 +218,13 @@ function handleMatchError(action, term, err) {
   }
 }
 
+/**
+ * Print a list of fonts to the console
+ * @param {Error | null} err - Error object or null
+ * @param {GoogleFontListInstance} list - Font list to display
+ * @param {string} [message="Search results for:"] - Header message
+ * @returns {void}
+ */
 function printFontList(err, list, message = "Search results for:") {
   if (err) return console.error(pc.red(err.toString()));
   if (list.data.length === 0) {
@@ -200,6 +241,12 @@ function printFontList(err, list, message = "Search results for:") {
   });
 }
 
+/**
+ * Print font operation results to the console
+ * @param {Error | null} err - Error object or null
+ * @param {FontResult[]} result - Array of font results to display
+ * @returns {void}
+ */
 function printResult(err, result) {
   if (err) return console.error(pc.red(err.toString()));
   console.log("");

@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "strict": false,
+    "noImplicitAny": true,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "baseUrl": ".",
+    "types": ["node"]
+  },
+  "include": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "cli.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage",
+    "test",
+    "test-folder",
+    "website",
+    "lib/windows"
+  ]
+}
