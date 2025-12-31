@@ -68,14 +68,16 @@ For instance, search for _Source Sans_ or _Sans Source_ will produce the same re
 ### Download a font
 
 ```
-$ gfcli download [family_name] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants]
+$ gfcli download [family_name] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants] [--ttf|--woff2]
 ```
 
 If **family_name** will match more than one family, nothing will be downloaded: a list of alternatives will help you better specify the font family name.
 
-Download command accepts two options:
+Download command accepts these options:
 - `-d` or `--dest` let you specify the folder where to download the fonts. If this option is omitted the fonts will be download in the folder in which the command was called (or in the home directory if this folder is not writable by the user)
 - `-v` or `--variants` let you specify which variants of the font will be downloaded. You have to write each variant separated by the other with a comma. For example `$ gfcli download Source Sans Pro -v 300,400`. If omitted, all variants will be downloaded.
+- `--ttf` downloads the font in TTF format (default)
+- `--woff2` downloads the font in WOFF2 format (optimized for web use)
 
 ### Install a font
 ```
@@ -123,6 +125,16 @@ $ gfcli download source sans pro -v 600,700italic
 
 Source Sans Pro variant 600 downloaded in /home/user/someFolder/SourceSansPro-600.ttf
 Source Sans Pro variant 700italic downloaded in /home/user/someFolder/SourceSansPro-700italic.ttf
+```
+
+**Download Inter in WOFF2 format**
+```
+$ gfcli download inter --woff2
+
+Inter variant regular downloaded in /home/user/someFolder/Inter-regular.woff2
+Inter variant 100 downloaded in /home/user/someFolder/Inter-100.woff2
+Inter variant 200 downloaded in /home/user/someFolder/Inter-200.woff2
+...
 ```
 
 **Install Lato 100**

@@ -41,17 +41,20 @@ program
   .description("Download a font family")
   .option("-d, --dest <folder>", "Specify destination folder")
   .option("-v, --variants <variants>", "Variants separated by comma")
+  .option("--ttf", "Download TTF format (default)")
+  .option("--woff2", "Download WOFF2 format")
   .action(async (family, options) => {
     await ensureFontsLoaded();
     const term = family.join(" ");
     const variants = options.variants ? options.variants.split(",") : false;
+    const format = options.woff2 ? "woff2" : "ttf";
 
     fontList.getFontByName(term, (err, filteredList) => {
       if (err || filteredList.data.length !== 1) {
         handleMatchError("Download", term, err);
         return;
       }
-      filteredList.getFirst().saveAt(variants, options.dest, printResult);
+      filteredList.getFirst().saveAt(variants, options.dest, format, printResult);
     });
   });
 
