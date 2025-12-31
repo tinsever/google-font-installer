@@ -107,7 +107,7 @@ Download command accepts these options:
 
 ### Install a font
 ```
-$ gfcli install [family_name|"family1,family2"] [-v|--variants comma_separeted_variants] [--refresh-cache]
+$ gfcli install [family_name|"family1,family2"] [-v|--variants comma_separated_variants] [--refresh-cache]
 ```
 
 If **family_name** will match more than one family, nothing will be installed: a list of alternatives will help you better specify the font family name.
