@@ -42,13 +42,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const command = `gfcli install "Inter"${variantsStr}`;
         
         // Clear and rebuild terminal content
-        terminalOutput.innerHTML = `
-            <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % ${command}</span></div>
-            <div class="out-dim" style="margin: 10px 0;">Downloading Google Font List...</div>
-            <div class="out-accent">Inter variants processed</div>
-            <br>
-            <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % </span><span style="background: var(--accent); width: 8px; height: 15px; display: inline-block; vertical-align: middle;"></span></div>
-        `;
+        terminalOutput.innerHTML = '';
+
+        // First line: prompt and command
+        const line1 = document.createElement('div');
+        const prompt1 = document.createElement('span');
+        prompt1.className = 'prompt';
+        prompt1.textContent = 'tinsever@Air-von-Tin';
+        const cmd1 = document.createElement('span');
+        cmd1.className = 'cmd';
+        cmd1.textContent = `hello-there % ${command}`;
+        line1.appendChild(prompt1);
+        line1.appendChild(document.createTextNode(' '));
+        line1.appendChild(cmd1);
+        terminalOutput.appendChild(line1);
+
+        // Second line: dimmed output
+        const line2 = document.createElement('div');
+        line2.className = 'out-dim';
+        line2.style.margin = '10px 0';
+        line2.textContent = 'Downloading Google Font List...';
+        terminalOutput.appendChild(line2);
+
+        // Third line: accent output
+        const line3 = document.createElement('div');
+        line3.className = 'out-accent';
+        line3.textContent = 'Inter variants processed';
+        terminalOutput.appendChild(line3);
+
+        // Line break
+        terminalOutput.appendChild(document.createElement('br'));
+
+        // Fourth line: prompt and cursor block
+        const line4 = document.createElement('div');
+        const prompt2 = document.createElement('span');
+        prompt2.className = 'prompt';
+        prompt2.textContent = 'tinsever@Air-von-Tin';
+        const cmd2 = document.createElement('span');
+        cmd2.className = 'cmd';
+        cmd2.textContent = 'hello-there % ';
+        const cursor = document.createElement('span');
+        cursor.style.background = 'var(--accent)';
+        cursor.style.width = '8px';
+        cursor.style.height = '15px';
+        cursor.style.display = 'inline-block';
+        cursor.style.verticalAlign = 'middle';
+        line4.appendChild(prompt2);
+        line4.appendChild(document.createTextNode(' '));
+        line4.appendChild(cmd2);
+        line4.appendChild(cursor);
+        terminalOutput.appendChild(line4);
     }
 
     // Initial update
