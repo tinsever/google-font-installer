@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GFCLI // Professional Typography Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="install-strip">
+        <span><b>NPM:</b> npm install -g google-font-cli</span>
+        <span><b>BREW:</b> brew tap tinsever/google-font-cli && brew install gfcli</span>
+    </div>
+
+    <div class="grid-container">
+        <div class="left-pane">
+            <div>
+                <h1>GF<br>CLI.</h1>
+                <p class="tagline">The command line interface for Google Fonts.</p>
+                
+                <div class="actions">
+                    <a href="https://github.com/tinsever/google-font-cli" class="btn">Source Code</a>
+                    <a href="https://www.npmjs.com/package/google-font-cli" class="btn">NPM Registry</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <p style="font-family: var(--mono); font-size: 0.7rem; color: #444; text-transform: uppercase;">Available Commands</p>
+                <div style="font-family: var(--mono); font-size: 0.8rem; color: #aaa; margin-top: 10px;">
+                    <code style="color: var(--accent);">search [query]</code> – Find fonts<br>
+                    <code style="color: var(--accent);">download [name]</code> – Download fonts<br>
+                    <code style="color: var(--accent);">install [name]</code> – Add to system<br>
+                    <code style="color: var(--accent);">copy [name]</code> – Get CSS URL
+                </div>
+            </div>
+        </div>
+
+        <div class="right-pane">
+            <div class="visualizer">
+                <div class="specimen-large">Aa</div>
+                
+                <div class="glyph-grid">
+                    <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span>
+                    <span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span>
+                    <span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span><span>0</span><span>1</span><span>2</span><span>3</span>
+                </div>
+
+                <div class="weight-strip">
+                    <div class="weight-cell" style="font-weight: 100;">100</div>
+                    <div class="weight-cell" style="font-weight: 300;">300</div>
+                    <div class="weight-cell active" style="font-weight: 400;">400</div>
+                    <div class="weight-cell" style="font-weight: 600;">600</div>
+                    <div class="weight-cell" style="font-weight: 700;">700</div>
+                    <div class="weight-cell" style="font-weight: 900;">900</div>
+                </div>
+            </div>
+
+            <div class="terminal">
+                <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % gfcli install "Inter"</span></div>
+                <div class="out-dim" style="margin: 10px 0;">Downloading Google Font List...</div>
+                <div class="out-accent">Inter variants processed</div>
+                <br>
+                <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % </span><span style="background: var(--accent); width: 8px; height: 15px; display: inline-block; vertical-align: middle;"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 40px 80px; font-family: var(--mono); font-size: 0.7rem; color: #333;">
+        GFCLI // TINSEVER &copy; 2025 MIT LICENSED
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
