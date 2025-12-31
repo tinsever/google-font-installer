@@ -1,6 +1,7 @@
 Google Font CLI
 =============
 
+> This tool uses [google-webfonts-helper](https://gwfh.mranftl.com/) to access Google Fonts without requiring an API key.
 
 Google Font CLI is a NodeJS module/CLI that lets you Search, Download and Install fonts offered by Google Web Fonts.
 
@@ -138,19 +139,12 @@ And then you can require it in your code:
 var GoogleFontList = require('google-font-cli');
 ```
 
-To use this API is necessary to obtain a Browser Key enabled to Google Font API from the [Google Developer Dashboard](https://console.developers.google.com/).
-
 ### GoogleFontList
 
-**GoogleFontList** is a class that can be instanced with the Google API Key as only argument.
+**GoogleFontList** is a class that downloads the font list from google-webfonts-helper.
 ```js
-var fontList = new GoogleFontList('API_KEY');
-```
-If you prefer you can also create an instance without the apiKey and call the methods `.setApiKey('API_KEY')` and `.downloadList()` in a second moment.
-```js
+var GoogleFontList = require('google-font-cli');
 var fontList = new GoogleFontList();
-fontList.setApiKey('API_KEY');
-fontList.downloadList();
 ```
 <a id="google-font-list-events"></a>
 
@@ -163,9 +157,7 @@ Emitter if something go wrong in downloading, coverting or processing data. The 
 <a id="google-font-list-properties"></a>
 #### Public properties
 ###### `data` [Array]
-Array of GoogleFont instances, a class that extends the data provided by the Google APIs. Empty until 'success' event.
-###### `apiKey` [String]
-The Google APIs Key setted with the constructor or with setApiKey().
+Array of GoogleFont instances, a class that extends the data provided by google-webfonts-helper. Empty until 'success' event.
 
 <a id="google-font-list-methods"></a>
 #### Public methods
@@ -175,22 +167,16 @@ The Google APIs Key setted with the constructor or with setApiKey().
 - Returns [String|Boolean] If apiKey is a valid string, return the apiKey trimmed, else returns false.
 
 Used to set the apiKey to download data from Google Web Font APIs.
-
-###### `downloadList()`
-Download the list from Google Web Font APIs.
-
-###### `parseRawData(rawData)`
-- _rawData_ [String] String in valid JSON format.
-
-Parse raw data in valid JSON format. Used internally, but public for convenience if someone prefers to use the object without downloading the list (ex. cached data).
+downloadList()`
+Download the list from google-webfonts-helpernternally, but public for convenience if someone prefers to use the object without downloading the list (ex. cached data).
 
 ###### `populate(jsonData)`
 - _jsonData_ [Array] An array of Object rappresenting the font like Google does.
 
-Populate the object `data` property with an array of GoogleFont instances, based on the data provided by Google Apis. Used internally, but public for convenience if someone prefers to use the object without downloading and parsing the list (ex. cached data).
+Populate the object `data` property with an array of GoogleFontfrom google-webfonts-helper.
 
-###### `clone()`
-- Returns [GoogleFontList] A new instance of GoogleFontList
+Populate the object `data` property with an array of GoogleFont instances, based on the data provided by google-webfonts-helper
+- Returns [GoogleFontList] A new in from google-webfonts-helperstance of GoogleFontList
 
 Return a new instance of the object, with the same `data` and `apiKey` properties.
 
@@ -259,13 +245,13 @@ It's instanced by the populate method of GoogleFontList, called internally by th
 ###### `family` `category` `version` `lastModified` [String]
 Inherits by Google Font API structure, respectively the font name, the font type (serif, sans-serif, etc), the version and the string rappresenting the last modification data.
 ###### `subsets` [Array]
-Inherits by Google Font API structure, a list of the available subsest for that font.
+Inherits by google-webfonts-helper data structure, respectively the font name, the font type (serif, sans-serif, etc), the version and the string rappresenting the last modification data.
+###### `subsets` [Array]
+Inherits by google-webfonts-helper data structure, a list of the available subsest for that font.
 ###### `variants` [Array]
-Inherits by Google Font API structure, a list of all available variants (weights) for that font.
+Inherits by google-webfonts-helper data structure, a list of all available variants (weights) for that font.
 ###### `files` [Object]
-Inherits by Google Font API structure, an object with key-value of variant and ttf remote file.
-###### `cssUrl` [String]
-Url of the css file containing the ready-to-use imports for the web about that specific font.
+Inherits by google-webfonts-helper dataing the ready-to-use imports for the web about that specific font.
 
 <a id="google-font-methods"></a>
 #### Public methods
@@ -273,7 +259,7 @@ Url of the css file containing the ready-to-use imports for the web about that s
 ###### `getFamily()` `getCategory()` `getVariants()` `getSubsets()` `getVersion()` `getLastMod()` `getFileList()` `getCssUrl()`
 Method to access to the public properties: it's a better idea use them insteed the properties for a future-proof reason. Maybe someday google will decide to changhe his properties names.
 All returns the type of the property, except `GetLastMod()` that return a new Date instance.
-
+ad of the properties for a future-proof reason. Maybe someday the data structure will change
 ##### `hasVariant(variant)`
 - variant [String] The name of a variant (300, 500, etc);
 - Returns [Boolean] true if the font has that variant, else returns false.
@@ -320,8 +306,6 @@ Install specified variants of the font. The destination folder depends on the pl
 ### Examples
 ```js
 var GoogleFontlist = require('google-font-cli');
-
-var fontList = new GoogleFontlist('VALID_API_KEY');
 
 fontList.on('success', function(){
 	this.searchFontByName('Source Sans Pro', function(err, filteredList) {
