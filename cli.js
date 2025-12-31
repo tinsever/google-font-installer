@@ -260,7 +260,7 @@ function handleMatchError(action, term, err) {
  * Print a list of fonts to the console
  * @param {Error | null} err - Error object or null
  * @param {GoogleFontListInstance} list - Font list to display
- * @param {string} [message="Search results for:"] - Header message
+ * @param {string} [message="Search results for:"] - Optional header message
  * @returns {void}
  */
 function printFontList(err, list, message = "Search results for:") {
