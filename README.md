@@ -92,7 +92,7 @@ For instance, search for _Source Sans_ or _Sans Source_ will produce the same re
 ### Download a font
 
 ```
-$ gfcli download [family_name|"family1,family2"] [-d|--dest destination_folder] [-v|--variants comma_separeted_variants] [--ttf|--woff2] [--refresh-cache]
+$ gfcli download [family_name|"family1,family2"] [-d|--dest destination_folder] [-v|--variants comma_separated_variants] [--ttf|--woff2] [--refresh-cache]
 ```
 
 If **family_name** will match more than one family, nothing will be downloaded: a list of alternatives will help you better specify the font family name.
