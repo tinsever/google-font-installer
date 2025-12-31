@@ -26,15 +26,12 @@
     "cli"
   ],
   "dependencies": {
-    "async": "^1.5.2",
-    "colors": "^1.1.2",
-    "commander": "^2.20.3",
+    "commander": "^12.1.0",
     "copy-paste-win32fix": "^1.4.0",
-    "file-type": "^3.6.0",
+    "file-type": "^19.6.0",
     "ink": "^6.6.0",
     "ink-select-input": "^6.2.0",
     "ink-text-input": "^6.0.0",
-    "mv": "^2.1.1",
     "ora": "^9.0.0",
     "pascal-case": "^1.1.2",
     "picocolors": "^1.1.1",
