@@ -94,7 +94,7 @@ describe('SystemFont', () => {
 			error.code = 'EEXIST';
 			jest.spyOn(fs, 'mkdir').mockRejectedValue(error);
 			
-			await expect(systemFont._isFolderOk('/tmp/existing')).resolves.not.toThrow();
+			await expect(systemFont._isFolderOk('/tmp/existing')).resolves.toBeUndefined();
 		});
 
 		it('should throw for other mkdir errors', async () => {
