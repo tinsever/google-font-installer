@@ -53,7 +53,7 @@ $ gfcli install "Open Sans" -v regular,700
 <br>
 
 ## Font installation footnote
-In Linux and OSX, the font will be installed in the user's font directory (~/.fonts for Linux, ~/Library/Fonts for OSX).
+In Linux and OSX, the font will be installed in the user's font directory (~/.local/share/fonts for Linux, ~/Library/Fonts for OSX).
 In Windows, due to the fact that font installation require some register modifications, I prefered to create a little WScript (a windows script that use ActiveX windows interface) and spawn a `cscript` process to install the font in a _'windows native way'_.
 
 # Installation
@@ -184,7 +184,7 @@ $ gfcli search inter --refresh-cache
 ```
 $ gfcli install lato -v 100
 
-Lato variant 100 downloaded in /home/user/.fonts/Lato-100.ttf
+Lato variant 100 downloaded in /home/user/.local/share/fonts/Lato-100.ttf
 
 ```
 
@@ -361,7 +361,7 @@ Download specified variants of the font in the current directory (where the scri
         - _path_: the path of the installed file
 
 Install specified variants of the font. The destination folder depends on the platform used:
-- Linux: _~/.fonts/_
+- Linux: _~/.local/share/fonts/_
 - OSX: _~/Library/Fonts/_
 - Windows: The file is not copied into c:\Windows\Fonts, but is used a WScript that install the font invoking the font install windows function.
 
