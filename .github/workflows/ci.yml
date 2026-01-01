@@ -1,12 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
-      - main
-      - 'feat/**'
-      - 'fix/**'
   pull_request:
     branches:
       - master
