@@ -33,6 +33,10 @@ jobs:
       - name: Run typecheck
         run: npm run typecheck
       
+      - name: Setup fonts directory (Linux)
+        if: runner.os == 'Linux'
+        run: mkdir -p ~/.local/share/fonts
+      
       - name: Run tests
         run: npm test
       

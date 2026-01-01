@@ -29,11 +29,11 @@ jobs:
       - name: Run typecheck
         run: npm run typecheck
       
+      - name: Setup fonts directory
+        run: mkdir -p ~/.local/share/fonts
+      
       - name: Run tests
         run: npm test
-      
-      - name: Setup fonts directory for CLI test
-        run: mkdir -p ~/.fonts
       
       - name: Test CLI installation
         run: |
