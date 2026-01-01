@@ -32,7 +32,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "commander": "^12.1.0",
+    "commander": "^14.0.2",
     "copy-paste-win32fix": "^1.4.0",
     "file-type": "^19.6.0",
     "ink": "^6.6.0",
