@@ -32,6 +32,9 @@ jobs:
       - name: Run tests
         run: npm test
       
+      - name: Setup fonts directory for CLI test
+        run: mkdir -p ~/.fonts
+      
       - name: Test CLI installation
         run: |
           npm install -g .
