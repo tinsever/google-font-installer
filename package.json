@@ -44,7 +44,7 @@
     "react": "^19.2.3"
   },
   "optionalDependencies": {
-    "node-powershell": "^4.0.0"
+    "node-powershell": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
