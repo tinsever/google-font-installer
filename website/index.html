@@ -3,72 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GFCLI // Professional Typography Tool</title>
+    <title>Google Font CLI // The Professional Typography Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="install-strip">
-        <span><b>NPM:</b> npm install -g google-font-cli</span>
-        <span><b>BREW:</b> brew tap tinsever/google-font-cli && brew install gfcli</span>
-    </div>
-
-    <div class="grid-container">
-        <div class="left-pane">
-            <div>
-                <h1>GF<br>CLI.</h1>
-                <p class="tagline">The command line interface for Google Fonts.</p>
-                
-                <div class="actions">
-                    <a href="https://github.com/tinsever/google-font-cli" class="btn">Source Code</a>
-                    <a href="https://www.npmjs.com/package/google-font-cli" class="btn">NPM Registry</a>
-                </div>
-            </div>
-
-            <div style="margin-top: 60px;">
-                <p style="font-family: var(--mono); font-size: 0.7rem; color: #444; text-transform: uppercase;">Available Commands</p>
-                <div style="font-family: var(--mono); font-size: 0.8rem; color: #aaa; margin-top: 10px;">
-                    <code style="color: var(--accent);">search [query]</code> – Find fonts<br>
-                    <code style="color: var(--accent);">download [name]</code> – Download fonts<br>
-                    <code style="color: var(--accent);">install [name]</code> – Add to system<br>
-                    <code style="color: var(--accent);">copy [name]</code> – Get CSS URL
-                </div>
-            </div>
+    <nav>
+        <div class="logo">GFCLI</div>
+        <div class="links">
+            <a href="https://www.npmjs.com/package/google-font-cli">NPM</a>
+            <a href="https://github.com/tinsever/google-font-cli" class="star-btn">Star on GitHub <span class="star">★</span></a>
         </div>
+    </nav>
 
-        <div class="right-pane">
-            <div class="visualizer">
-                <div class="specimen-large">Aa</div>
-                
-                <div class="glyph-grid">
-                    <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span>
-                    <span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span>
-                    <span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span><span>0</span><span>1</span><span>2</span><span>3</span>
+    <main>
+        <section class="hero">
+            <h1 class="headline">
+                Google Fonts,<br>
+                <span class="italic-accent">commanded.</span>
+            </h1>
+            <p class="sub-headline">
+                We give you full <span class="tech-highlight">FUZZY SEARCH + AUTOMATIC INSTALLATION</span> power over a growing index of typefaces relevant to your design explosion.
+            </p>
+
+            <div class="install-section">
+                <div class="install-tabs">
+                    <button class="tab-btn active" data-target="npm">NPM</button>
+                    <button class="tab-btn" data-target="brew">Homebrew</button>
                 </div>
-
-                <div class="weight-strip">
-                    <div class="weight-cell" style="font-weight: 100;">100</div>
-                    <div class="weight-cell" style="font-weight: 300;">300</div>
-                    <div class="weight-cell active" style="font-weight: 400;">400</div>
-                    <div class="weight-cell" style="font-weight: 600;">600</div>
-                    <div class="weight-cell" style="font-weight: 700;">700</div>
-                    <div class="weight-cell" style="font-weight: 900;">900</div>
+                <div class="install-bar">
+                    <div class="cmd-container active" id="cmd-npm" data-copy="npm install -g google-font-cli">
+                        <span class="prompt">$</span> npm install -g google-font-cli
+                    </div>
+                    <div class="cmd-container" id="cmd-brew" data-copy="brew tap tinsever/google-font-cli && brew install gfcli">
+                        <span class="prompt">$</span> brew tap tinsever/google-font-cli && brew install gfcli
+                    </div>
+                    <div class="copy-feedback">Copied!</div>
                 </div>
             </div>
+        </section>
 
-            <div class="terminal">
-                <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % gfcli install "Inter"</span></div>
-                <div class="out-dim" style="margin: 10px 0;">Downloading Google Font List...</div>
-                <div class="out-accent">Inter variants processed</div>
-                <br>
-                <div><span class="prompt">tinsever@Air-von-Tin</span> <span class="cmd">hello-there % </span><span style="background: var(--accent); width: 8px; height: 15px; display: inline-block; vertical-align: middle;"></span></div>
+        <section class="features">
+            <div class="feature-card">
+                <h3>Cross-Platform</h3>
+                <p>Automatic installation for Linux, macOS, and Windows. No manual dragging required.</p>
             </div>
-        </div>
-    </div>
+            <div class="feature-card">
+                <h3>Smart Search</h3>
+                <p>Fuzzy matching for font names makes finding fonts effortless. Typo-tolerant.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Dev Friendly</h3>
+                <p>Use as a CLI or integrate as a Node.js library. JSON output available.</p>
+            </div>
+        </section>
 
-    <footer style="padding: 40px 80px; font-family: var(--mono); font-size: 0.7rem; color: #333;">
-        GFCLI // TINSEVER &copy; 2025 MIT LICENSED
-    </footer>
+        <section class="demo-section">
+            <h2 class="section-title">Workflow</h2>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="terminal-body">
+                    <div class="line"><span class="prompt">➜</span> <span class="cmd">gfcli search "open sans"</span></div>
+                    <div class="line output">Search results for: "open sans"</div>
+                    <br>
+                    <div class="line output">&nbsp;* Open Sans</div>
+                    <div class="line output">&nbsp;&nbsp;&nbsp;&nbsp;Category: sans-serif</div>
+                    <div class="line output">&nbsp;&nbsp;&nbsp;&nbsp;Variants: 300, regular, 500, 600, 700, 800...</div>
+                    <div class="line output">&nbsp;&nbsp;&nbsp;&nbsp;CSS Url:&nbsp;&nbsp;https://fonts.googleapis.com/css?family=Open+Sans</div>
+                    <br>
+                    <div class="line"><span class="prompt">➜</span> <span class="cmd">gfcli install "Open Sans"</span></div>
+                    <div class="line output">Open Sans variant 300 processed: /Users/tinsever/Library/Fonts/OpenSans-300.ttf</div>
+                    <div class="line output">Open Sans variant 500 processed: /Users/tinsever/Library/Fonts/OpenSans-500.ttf</div>
+                    <div class="line output">Open Sans variant 600 processed: /Users/tinsever/Library/Fonts/OpenSans-600.ttf</div>
+                    <div class="line output">...</div>
+                    <div class="line success">✓ Font installed successfully!</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="details">
+            <div class="detail-block">
+                <h4>Formats</h4>
+                <p>Downloads <code>.ttf</code> by default for desktop use. Pass the <code>--woff2</code> flag to fetch web-optimized files instead.</p>
+            </div>
+            <div class="detail-block">
+                <h4>No API Key</h4>
+                <p>Uses google-webfonts-helper to access Google Fonts without requiring an API key.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>MIT License. Created by <a href="https://github.com/tinsever">Tin Sever</a>.</p>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
