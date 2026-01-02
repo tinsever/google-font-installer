@@ -32,11 +32,11 @@ jobs:
         with:
           generate_release_notes: true
 
-      - name: Bump Homebrew formula
-        uses: mislav/bump-homebrew-formula-action@v3
-        with:
-          formula-name: google-font-cli
-          homebrew-tap: tinsever/homebrew-google-font-cli
-          base-branch: main
-        env:
-          COMMITTER_TOKEN: ${{ secrets.GH_PAT }}
+#      - name: Bump Homebrew formula
+#        uses: mislav/bump-homebrew-formula-action@v3
+#        with:
+#          formula-name: google-font-cli
+#          homebrew-tap: tinsever/homebrew-google-font-cli
+#          base-branch: main
+#        env:
+#          COMMITTER_TOKEN: ${{ secrets.GH_PAT }}
