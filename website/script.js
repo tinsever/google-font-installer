@@ -1,99 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const weightCells = document.querySelectorAll('.weight-cell');
-    const terminalOutput = document.querySelector('.terminal');
-    const specimen = document.querySelector('.specimen-large');
-    const selectedWeights = new Set();
+    // Install Tab Switching
+    const installTabs = document.querySelectorAll('.install-tabs:not(.demo-tabs) .tab-btn');
+    const cmdContainers = document.querySelectorAll('.cmd-container');
+    const feedback = document.querySelector('.copy-feedback');
 
-    // Preselect 400
-    const defaultWeight = '400';
-    selectedWeights.add(defaultWeight);
-    
-    weightCells.forEach(cell => {
-        const weight = cell.textContent.trim();
-        if (weight === defaultWeight) {
-            cell.classList.add('active');
-        }
-        
-        cell.style.cursor = 'pointer';
-        
-        cell.addEventListener('click', () => {
-            if (selectedWeights.has(weight)) {
-                selectedWeights.delete(weight);
-                cell.classList.remove('active');
-            } else {
-                selectedWeights.add(weight);
-                cell.classList.add('active');
-            }
+    installTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all install tabs
+            installTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
+
+            // Hide all cmd containers
+            cmdContainers.forEach(c => c.classList.remove('active'));
             
-            updateTerminal();
-            updateSpecimen();
+            // Show target container
+            const targetId = `cmd-${tab.dataset.target}`;
+            document.getElementById(targetId).classList.add('active');
         });
     });
 
-    function updateSpecimen() {
-        const weights = Array.from(selectedWeights).sort((a, b) => parseInt(a) - parseInt(b));
-        const primaryWeight = weights.length > 0 ? parseInt(weights[0]) : 400;
-        specimen.style.fontWeight = primaryWeight;
-    }
+    // Demo Tab Switching
+    const demoTabs = document.querySelectorAll('.term-tab');
+    const demoBodies = document.querySelectorAll('.terminal-body');
 
-    function updateTerminal() {
-        const weights = Array.from(selectedWeights).sort((a, b) => parseInt(a) - parseInt(b));
-        const variantsStr = weights.length > 0 ? ` -v ${weights.join(',')}` : '';
-        const command = `gfcli install "Inter"${variantsStr}`;
-        
-        // Clear and rebuild terminal content
-        terminalOutput.innerHTML = '';
+    demoTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all demo tabs
+            demoTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
 
-        // First line: prompt and command
-        const line1 = document.createElement('div');
-        const prompt1 = document.createElement('span');
-        prompt1.className = 'prompt';
-        prompt1.textContent = 'tinsever@Air-von-Tin';
-        const cmd1 = document.createElement('span');
-        cmd1.className = 'cmd';
-        cmd1.textContent = `hello-there % ${command}`;
-        line1.appendChild(prompt1);
-        line1.appendChild(document.createTextNode(' '));
-        line1.appendChild(cmd1);
-        terminalOutput.appendChild(line1);
+            // Hide all demo bodies
+            demoBodies.forEach(b => b.classList.remove('active'));
+            
+            // Show target body
+            const targetId = `demo-${tab.dataset.demoTarget}`;
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
 
-        // Second line: dimmed output
-        const line2 = document.createElement('div');
-        line2.className = 'out-dim';
-        line2.style.margin = '10px 0';
-        line2.textContent = 'Downloading Google Font List...';
-        terminalOutput.appendChild(line2);
+    // Copy Functionality
+    cmdContainers.forEach(container => {
+        container.addEventListener('click', async () => {
+            const textToCopy = container.dataset.copy;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                
+                // Show feedback
+                feedback.classList.add('visible');
+                
+                // Hide feedback after 2 seconds
+                setTimeout(() => {
+                    feedback.classList.remove('visible');
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        });
+    });
 
-        // Third line: accent output
-        const line3 = document.createElement('div');
-        line3.className = 'out-accent';
-        line3.textContent = 'Inter variants processed';
-        terminalOutput.appendChild(line3);
+    // Optional: Add simple scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1
+    };
 
-        // Line break
-        terminalOutput.appendChild(document.createElement('br'));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
-        // Fourth line: prompt and cursor block
-        const line4 = document.createElement('div');
-        const prompt2 = document.createElement('span');
-        prompt2.className = 'prompt';
-        prompt2.textContent = 'tinsever@Air-von-Tin';
-        const cmd2 = document.createElement('span');
-        cmd2.className = 'cmd';
-        cmd2.textContent = 'hello-there % ';
-        const cursor = document.createElement('span');
-        cursor.style.background = 'var(--accent)';
-        cursor.style.width = '8px';
-        cursor.style.height = '15px';
-        cursor.style.display = 'inline-block';
-        cursor.style.verticalAlign = 'middle';
-        line4.appendChild(prompt2);
-        line4.appendChild(document.createTextNode(' '));
-        line4.appendChild(cmd2);
-        line4.appendChild(cursor);
-        terminalOutput.appendChild(line4);
-    }
-
-    // Initial update
-    updateSpecimen();
+    // Select elements to animate
+    const animatedElements = document.querySelectorAll('.feature-card, .terminal-window, .detail-block');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
 });
