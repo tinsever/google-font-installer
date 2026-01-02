@@ -192,12 +192,16 @@ describe('GoogleFont', () => {
 	describe('install', () => {
 		it('should accept variants and callback', () => {
 			const font = new GoogleFont({ family: 'Roboto' });
+			// Mock installAsync to prevent actual font installation
+			font.installAsync = jest.fn().mockResolvedValue([]);
 			
 			expect(() => font.install(['regular'], () => {})).not.toThrow();
 		});
 
 		it('should work without callback', () => {
 			const font = new GoogleFont({ family: 'Roboto' });
+			// Mock installAsync to prevent actual font installation
+			font.installAsync = jest.fn().mockResolvedValue([]);
 			
 			expect(() => font.install(['regular'])).not.toThrow();
 		});
@@ -206,18 +210,24 @@ describe('GoogleFont', () => {
 	describe('saveAt', () => {
 		it('should accept variants, destFolder, format, and callback', () => {
 			const font = new GoogleFont({ family: 'Roboto' });
+			// Mock saveAtAsync to prevent actual font download
+			font.saveAtAsync = jest.fn().mockResolvedValue([]);
 			
 			expect(() => font.saveAt(['regular'], '/tmp', 'ttf', () => {})).not.toThrow();
 		});
 
 		it('should accept callback as third argument (backward compatibility)', () => {
 			const font = new GoogleFont({ family: 'Roboto' });
+			// Mock saveAtAsync to prevent actual font download
+			font.saveAtAsync = jest.fn().mockResolvedValue([]);
 			
 			expect(() => font.saveAt(['regular'], '/tmp', () => {})).not.toThrow();
 		});
 
 		it('should work without callback', () => {
 			const font = new GoogleFont({ family: 'Roboto' });
+			// Mock saveAtAsync to prevent actual font download
+			font.saveAtAsync = jest.fn().mockResolvedValue([]);
 			
 			expect(() => font.saveAt(['regular'], '/tmp', 'woff2')).not.toThrow();
 		});
