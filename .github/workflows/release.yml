@@ -10,7 +10,36 @@ permissions:
   contents: write   # Required to create the GitHub Release
 
 jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run typecheck
+        run: npm run typecheck
+
+      - name: Setup fonts directory
+        run: |
+          mkdir -p -v ~/.local/share/fonts
+          mkdir -p -v ~/Library/Fonts
+
+      - name: Run tests
+        run: npm test -- --runInBand
+
   release:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
