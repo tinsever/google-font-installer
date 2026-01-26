@@ -38,7 +38,7 @@
     "ink": "^6.6.0",
     "ink-select-input": "^6.2.0",
     "ink-text-input": "^6.0.0",
-    "ora": "^5.4.1",
+    "ora": "^9.1.0",
     "pascal-case": "^1.1.2",
     "picocolors": "^1.1.1",
     "react": "^19.2.3"
